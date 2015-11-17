@@ -18,6 +18,9 @@ public class InterfaceGraphique extends JFrame{
 		this.menu = new InterfaceMenu();
 		this.setJMenuBar(this.menu);
 		
+		InterfaceJeu ij = new InterfaceJeu();
+		this.setContentPane(ij);
+		
 		this.setVisible(true);
 		
 	}
@@ -25,6 +28,5 @@ public class InterfaceGraphique extends JFrame{
 	public static void main(String[] args) {
 		
 		InterfaceGraphique ig = new InterfaceGraphique();
-		
 	}
 }
