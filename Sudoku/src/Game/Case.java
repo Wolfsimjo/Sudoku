@@ -5,9 +5,11 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 
-public class Case {
-	
+public class Case  implements Serializable{
+	private static final long serialVersionUID = 5L;
+
 	// Nombre dans la case
 	private int nombre;
 	

@@ -3,8 +3,11 @@ package Game;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.io.Serializable;
 
-public class Grille {
+public class Grille implements Serializable{
+	private static final long serialVersionUID = 2L;
+
 	private Case[][] cases;
 	
 	public Grille() {
@@ -60,6 +63,16 @@ public class Grille {
 
 	}
 
+	public int[][] grilleToArray(Grille grille){
+		//TODO Fonction de conversion de la grille (vers tableau)
+		return null;
+	}
+	
+	public Grille arrayToGrille(int[][] array){
+		//TODO Fonction de conversion de la grille (vers Grille)
+		return null;
+	}
+	
 	public boolean verifierLigne(int numeroLigne){
 		//TODO 
 		return false;
