@@ -2,9 +2,7 @@ package Game;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 public class Case  implements Serializable{
@@ -18,6 +16,11 @@ public class Case  implements Serializable{
 	
 	// Case modifiable ou non
 	private boolean modifiable;
+	
+	// Taille de la case
+	public static final int size = 70;
+	// Marge à gauche et en haut du Sudoku
+	public static final int margin = (int) (1000 - 9*size) / 2; // Centre le sudoku
 	
 	/**
 	 * Constructeur pour case modifiable
@@ -51,13 +54,18 @@ public class Case  implements Serializable{
 	 */
 	public void draw(Graphics2D g, int colonne, int ligne) {
 		
+		// Dessine l'intérieur des cases (carré blanc)
 		g.setColor(Color.WHITE);
-		g.fillRect(colonne * 50, ligne * 50, 50, 50);
+		g.fillRect(margin + colonne * size, margin + ligne * size, size, size);
+		// Dessine le contour des cases (carré vide noir)
 		g.setColor(Color.BLACK);
-		g.drawRect(colonne * 50, ligne *50, 50, 50);
+		g.drawRect(margin + colonne * size, margin + ligne *size, size, size);
 		
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 20)); 
-		g.drawString(Integer.toString(this.nombre), colonne * 50 + 20, ligne * 50 + 30);
+		// Dessine le nombre à l'intérieur de la case si celui-ci est compris entre 0 et 9
+		if (this.nombre > 0 && this.nombre <= 9) {
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 20)); 
+			g.drawString(Integer.toString(this.nombre), margin + colonne * size + (int)(size / 2.5), margin + ligne * size + (int)(size / 2.5) + 10);
+		}
 		
 	}
 	

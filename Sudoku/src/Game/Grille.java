@@ -10,6 +10,9 @@ public class Grille implements Serializable{
 
 	private Case[][] cases;
 	
+	/**
+	 * Constructeur de grille vide
+	 */
 	public Grille() {
 		this.cases = new Case[9][9];
 		for (int i = 0; i < 9; i++) {
@@ -34,16 +37,26 @@ public class Grille implements Serializable{
 				else
 					numeroRegion = 8;
 				
-				this.cases[i][j] = new Case(numeroRegion, numeroRegion);
+				this.cases[i][j] = new Case(0, numeroRegion);
 			}
 		}
 	}
 	
+	/**
+	 * Constructeur de grille à partir d'un tableau de cases
+	 * @param cases
+	 */
 	public Grille(Case[][] cases) {
 		super();
 		this.setCases(cases);
 	}
 	
+	/**
+	 * Méthode qui dessine la grille : 
+	 * Dessine d'abord les cases du tableau cases
+	 * Dessine ensuite les bordures des régions, plus épaisses
+	 * @param g
+	 */
 	public void draw(Graphics2D g) {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -51,12 +64,13 @@ public class Grille implements Serializable{
 			}
 		}
 		
+		// Bordures des régions 
 		float epaisseur = 3;
 		Stroke oldStroke = g.getStroke();
 		g.setStroke(new BasicStroke(epaisseur));
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				g.drawRect(i * 150, j * 150, 150, 150);
+				g.drawRect(Case.margin + i * Case.size*3, Case.margin + j * Case.size*3, Case.size*3, Case.size*3);
 			}
 		}
 		g.setStroke(oldStroke);
