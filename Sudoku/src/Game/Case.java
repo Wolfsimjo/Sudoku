@@ -1,6 +1,9 @@
 package Game;
 
-public class Case {
+import java.io.Serializable;
+
+public class Case  implements Serializable{
+	private static final long serialVersionUID = 5L;
 	private int nombre;
 	private int numeroRegion;
 	private boolean modifiable;

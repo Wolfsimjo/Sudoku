@@ -1,6 +1,9 @@
 package Game;
 
-public class Grille {
+import java.io.Serializable;
+
+public class Grille implements Serializable{
+	private static final long serialVersionUID = 2L;
 	private Case[][] cases;
 	
 	public Grille() {
@@ -11,6 +14,17 @@ public class Grille {
 		super();
 		this.setCases(cases);
 	}
+	
+	public int[][] grilleToArray(Grille grille){
+		//TODO Fonction de conversion de la grille (vers tableau)
+		return null;
+	}
+	
+	public Grille arrayToGrille(int[][] array){
+		//TODO Fonction de conversion de la grille (vers Grille)
+		return null;
+	}
+	
 
 	public boolean verifierLigne(int numeroLigne){
 		//TODO 
