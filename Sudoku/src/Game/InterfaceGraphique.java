@@ -1,15 +1,11 @@
 package Game;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 public class InterfaceGraphique extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	private InterfaceMenu menu;
-	private InterfaceJeu jeu;
 	
 	public InterfaceGraphique () {
 		
@@ -22,8 +18,6 @@ public class InterfaceGraphique extends JFrame{
 		this.setJMenuBar(this.menu);
 		
 		InterfaceJeu ij = new InterfaceJeu();
-		Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
-		ij.setBorder(padding);
 		this.setContentPane(ij);
 
 		this.setVisible(true);

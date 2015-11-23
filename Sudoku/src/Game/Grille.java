@@ -37,7 +37,7 @@ public class Grille implements Serializable{
 				else
 					numeroRegion = 8;
 				
-				this.cases[i][j] = new Case(0, numeroRegion);
+				this.cases[i][j] = new Case(numeroRegion, i, j);
 			}
 		}
 	}
@@ -74,7 +74,41 @@ public class Grille implements Serializable{
 			}
 		}
 		g.setStroke(oldStroke);
-
+	}
+	
+	/**
+	 * Méthode pour récupérer une case en fonction de sa position physique
+	 * @param clicX : position x d'un clic
+	 * @param clicY : position y d'un clic
+	 * @return : la case présente à cet endroit, null le cas échéant
+	 */
+	public Case getCase(int clicX, int clicY) {
+		int positionX = (int) Math.floor((double)(clicX - Case.margin) / Case.size);
+		int positionY = (int) Math.floor((double)(clicY - Case.margin) / Case.size);
+		
+		if (positionX >= 0 && positionX <= 8 && positionY >= 0 && positionY <= 8) {
+			Case c = this.cases[positionX][positionY];
+			return c;
+		} else {
+			return null;
+		}
+	}
+	
+	/**
+	 * Méthode pour remplacer une case dans la grille
+	 * @param c : la nouvelle case
+	 * @param positionX : la position x dans le tableau cases de l'ancienne case
+	 * @param positionY : idem pour y 
+	 */
+	public void setCase(Case c) {
+		if (c != null) { 
+			int positionX = c.getPositionX();
+			int positionY = c.getPositionY();
+			
+			if (positionX >= 0 && positionX <= 8 && positionY >= 0 && positionY <= 8) {
+				this.cases[positionX][positionY] = c;
+			}
+		}
 	}
 
 	public int[][] grilleToArray(Grille grille){
