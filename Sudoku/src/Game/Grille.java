@@ -82,10 +82,7 @@ public class Grille implements Serializable{
 	 * @param clicY : position y d'un clic
 	 * @return : la case présente à cet endroit, null le cas échéant
 	 */
-	public Case getCase(int clicX, int clicY) {
-		int positionX = (int) Math.floor((double)(clicX - Case.margin) / Case.size);
-		int positionY = (int) Math.floor((double)(clicY - Case.margin) / Case.size);
-		
+	public Case getCase(int positionX, int positionY) {
 		if (positionX >= 0 && positionX <= 8 && positionY >= 0 && positionY <= 8) {
 			Case c = this.cases[positionX][positionY];
 			return c;

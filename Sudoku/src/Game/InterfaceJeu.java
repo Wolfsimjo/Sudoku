@@ -52,7 +52,9 @@ public class InterfaceJeu extends JPanel {
 			
 			int x = e.getX();
 			int y = e.getY();
-			nouvelleCase = grille.getCase(x, y);
+			int positionX = (int) Math.floor((double)(x - Case.margin) / Case.size);
+			int positionY = (int) Math.floor((double)(y - Case.margin) / Case.size);
+			nouvelleCase = grille.getCase(positionX, positionY);
 			if (nouvelleCase != null) {
 				nouvelleCase.setSelected(true);
 				grille.setCase(nouvelleCase);
@@ -75,16 +77,55 @@ public class InterfaceJeu extends JPanel {
 		
 		@Override
 		public void keyPressed(KeyEvent arg0) {
-			char key = arg0.getKeyChar();
-			int nb = Character.getNumericValue(key);
 			
-			if (nouvelleCase != null) {
-				if (nouvelleCase.isModifiable() && nouvelleCase.isSelected()) {
-					nouvelleCase.setNombre(nb);
-					grille.setCase(nouvelleCase);
-					repaint();
+			// Chiffre
+			if (arg0.getKeyCode() >= 96 && arg0.getKeyCode() <=105) {
+				char key = arg0.getKeyChar();			
+				int nb = Character.getNumericValue(key);
+				
+				if (nouvelleCase != null) {
+					if (nouvelleCase.isModifiable() && nouvelleCase.isSelected()) {
+						nouvelleCase.setNombre(nb);
+						grille.setCase(nouvelleCase);
+						repaint();
+					}
 				}
 			}
+			// Flèche
+			else if (arg0.getKeyCode() >= 37 && arg0.getKeyCode() <= 40) {
+				ancienneCase = nouvelleCase;
+				if (ancienneCase != null) {
+					ancienneCase.setSelected(false);
+					grille.setCase(ancienneCase);
+				}
+				
+				int x = ancienneCase.getPositionX();
+				int y = ancienneCase.getPositionY();
+				switch (arg0.getKeyCode()) {
+					case 37:
+						x--;
+						break;
+					case 38:
+						y--;
+						break;
+					case 39:
+						x++;
+						break;
+					case 40:
+						y++;
+						break;
+					default:
+						break;
+				}
+				
+				nouvelleCase = grille.getCase(x, y);
+				if (nouvelleCase != null) {
+					nouvelleCase.setSelected(true);
+					grille.setCase(nouvelleCase);
+				}
+				repaint();
+			}
+			
 		}
 		
 		// Non utilisés //
