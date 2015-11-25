@@ -1,5 +1,7 @@
 package Game;
 
+import models.Grille;
+
 public class SudokuSolver {
 	public Grille resoudreGrille(Grille grille){
 		//TODO

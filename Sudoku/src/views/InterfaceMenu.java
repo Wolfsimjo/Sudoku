@@ -1,4 +1,4 @@
-package Game;
+package views;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;

@@ -1,5 +1,8 @@
 package Game;
 
+import models.Grille;
+import views.InterfaceGraphique;
+
 public class Sudoku {
 	private Grille grille;
 	private Difficulte niveauDifficulte;

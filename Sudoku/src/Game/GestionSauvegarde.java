@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import models.Grille;
+
 public class GestionSauvegarde {
 	
 	public void sauvegarder(Grille grille, File file){	

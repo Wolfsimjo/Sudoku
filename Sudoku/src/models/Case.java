@@ -1,4 +1,4 @@
-package Game;
+package models;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -84,11 +84,15 @@ public class Case  implements Serializable{
 			g.setColor(Color.BLACK);
 		g.drawRect(margin + colonne * size, margin + ligne *size, size, size);
 		g.setStroke(oldStroke);
+		g.setColor(Color.BLACK);
 		
 		// Dessine le nombre à l'intérieur de la case si celui-ci est compris entre 0 et 9
 		if (this.nombre > 0 && this.nombre <= 9) {
-			g.setFont(new Font("TimesRoman", Font.PLAIN, 20)); 
+			if (this.isModifiable())
+				g.setColor(Color.RED);
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 25)); 
 			g.drawString(Integer.toString(this.nombre), margin + colonne * size + (int)(size / 2.5), margin + ligne * size + (int)(size / 2.5) + 10);
+			g.setColor(Color.BLACK);
 		}
 		
 	}

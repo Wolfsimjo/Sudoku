@@ -1,11 +1,12 @@
-package Game;
+package models;
 
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.io.Serializable;
+import java.util.Observable;
 
-public class Grille implements Serializable{
+public class Grille extends Observable implements Serializable{
 	private static final long serialVersionUID = 2L;
 
 	private Case[][] cases;
@@ -106,6 +107,9 @@ public class Grille implements Serializable{
 				this.cases[positionX][positionY] = c;
 			}
 		}
+		
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	public int[][] grilleToArray(Grille grille){

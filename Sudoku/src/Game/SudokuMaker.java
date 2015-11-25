@@ -3,6 +3,8 @@ package Game;
 import java.util.ArrayList;
 import java.util.Random;
 
+import models.Grille;
+
 public class SudokuMaker {
 	public Grille creerGrille(){
 		//TODO
