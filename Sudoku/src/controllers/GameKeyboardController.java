@@ -6,11 +6,22 @@ import java.awt.event.KeyListener;
 import models.Grille;
 import views.InterfaceJeu;
 
+/**
+ * @author major
+ * Controleur s'occupant de la gestion du clavier
+ * 	- Entrée d'un chiffre au clavier dans une case
+ *  - Utilisation des flèches pour le déplacement sur le sudoku
+ */
 public class GameKeyboardController implements KeyListener {
 
 	InterfaceJeu ij;
 	Grille grille;
 	
+	/**
+	 * Constructeur du controleur
+	 * @param ij => La vue associée, ici le JPanel du sudoku
+	 * @param grille => Le modèle qu'on va altérer (la grille)
+	 */
 	public GameKeyboardController(InterfaceJeu ij, Grille grille) {
 		this.ij = ij;
 		this.grille = grille;
@@ -31,7 +42,9 @@ public class GameKeyboardController implements KeyListener {
 				}
 			}
 		}
-		// Flèche
+		// Flèche : si on est au bord du sudoku à droite par exemple
+		// 			et qu'on utilise la flèche droite => on revient
+		//			au début de la ligne
 		else if (e.getKeyCode() >= 37 && e.getKeyCode() <= 40) {
 			ij.ancienneCase = ij.nouvelleCase;
 			if (ij.ancienneCase != null) {
@@ -79,7 +92,7 @@ public class GameKeyboardController implements KeyListener {
 		
 	}
 
-	// Non utilisé
+	// Non utilisés
 	@Override
 	public void keyReleased(KeyEvent e) {}
 	@Override
