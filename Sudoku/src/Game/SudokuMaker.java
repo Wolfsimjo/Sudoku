@@ -70,6 +70,7 @@ public class SudokuMaker {
 				array[i][j] = arrayTempo[i-6][j-6];
 			}
 		}
+		new SudokuSolver().firtsAlgo(array, 0);
 		return array;
 	}
 }

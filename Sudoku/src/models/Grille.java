@@ -112,13 +112,29 @@ public class Grille extends Observable implements Serializable{
 		this.setChanged();
 		this.notifyObservers();
 	}
-
-	public int[][] grilleToArray(Grille grille){
-		//TODO Fonction de conversion de la grille (vers tableau)
-		return null;
+	
+	/**
+	 * Retourne le tableau d entier associe a une grille
+	 * @param grille
+	 * @return
+	 */
+	static public Integer[][] grilleToArray(Grille grille){
+		Case[][] tmp = grille.cases;
+		Integer[][] array = new Integer[9][9];
+		for(int i = 0; i< tmp.length;i++){
+			for(int j = 0; j < tmp[i].length;j++){
+				array[tmp[i][j].getPositionX()][tmp[i][j].getPositionY()] = tmp[i][j].getNombre();
+			}
+		}
+		return array;
 	}
 	
-	public Grille arrayToGrille(int[][] array){
+	/**
+	 * Retourne la grille correspondant a un tableau d entier donne
+	 * @param array
+	 * @return
+	 */
+	static public Grille arrayToGrille(int[][] array){
 		//TODO Fonction de conversion de la grille (vers Grille)
 		return null;
 	}
