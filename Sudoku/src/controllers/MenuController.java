@@ -3,14 +3,17 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import models.Grille;
 import views.InterfaceMenu;
 
 public class MenuController implements ActionListener {
 	
 	InterfaceMenu menu;
+	Grille grille;
 
-	public MenuController(InterfaceMenu menu) {
+	public MenuController(InterfaceMenu menu, Grille grille) {
 		this.menu = menu;
+		this.grille = grille;
 	}
 	
 	@Override

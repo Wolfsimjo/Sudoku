@@ -13,17 +13,15 @@ public class InterfaceGraphique extends JFrame{
 	private InterfaceMenu menu;
 	private InterfaceJeu ij;
 	
-	public InterfaceGraphique (InterfaceJeu ij) {
+	public InterfaceGraphique (InterfaceJeu ij, InterfaceMenu menu) {
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Sudoku");
 		this.setSize(1000, 1000);
 		this.setLocationRelativeTo(null);
 		
-		this.menu = new InterfaceMenu();
+		this.menu = menu;
 		this.setJMenuBar(this.menu);
-		MenuController mc = new MenuController(menu);
-		this.menu.addMenuController(mc);
 		
 		this.ij = ij;
 		this.setContentPane(ij);
@@ -32,20 +30,24 @@ public class InterfaceGraphique extends JFrame{
 		
 	}
 	
-	public void addControllers(GameKeyboardController gk, GameMouseController gm) {
+	public void addControllers(GameKeyboardController gk, GameMouseController gm, MenuController mc) {
 		this.ij.addKeyListener(gk);
 		this.ij.addMouseListener(gm);
+		this.menu.addMenuController(mc);
 	}
 	
 	public static void main(String[] args) {
 		
 		Grille model = new Grille();
 		InterfaceJeu ij = new InterfaceJeu(model);
-		InterfaceGraphique ig = new InterfaceGraphique(ij);
+		InterfaceMenu menu = new InterfaceMenu();
+		InterfaceGraphique ig = new InterfaceGraphique(ij, menu);
+		
 		GameKeyboardController gk = new  GameKeyboardController(ij, model);
 		GameMouseController gm = new GameMouseController(ij, model);
+		MenuController mc = new MenuController(menu, model);
 		
 		model.addObserver(ij);
-		ig.addControllers(gk, gm);
+		ig.addControllers(gk, gm, mc);
 	}
 }
