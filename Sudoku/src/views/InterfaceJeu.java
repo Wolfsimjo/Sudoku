@@ -19,7 +19,7 @@ import models.Grille;
 public class InterfaceJeu extends JPanel implements Observer {
 
 	private static final long serialVersionUID = -894299279968533611L;
-	public Grille grille;
+	private Grille grille;
 	
 	// Ancienne case sélectionnée
 	public Case ancienneCase;

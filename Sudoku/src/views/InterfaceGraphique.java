@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import controllers.GameKeyboardController;
 import controllers.GameMouseController;
+import controllers.MenuController;
 import models.Grille;
 
 public class InterfaceGraphique extends JFrame{
@@ -21,6 +22,8 @@ public class InterfaceGraphique extends JFrame{
 		
 		this.menu = new InterfaceMenu();
 		this.setJMenuBar(this.menu);
+		MenuController mc = new MenuController(menu);
+		this.menu.addMenuController(mc);
 		
 		this.ij = ij;
 		this.setContentPane(ij);
