@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Observable;
 
 public class Grille extends Observable implements Serializable{
@@ -121,20 +122,110 @@ public class Grille extends Observable implements Serializable{
 		//TODO Fonction de conversion de la grille (vers Grille)
 		return null;
 	}
-	
-	public boolean verifierLigne(int numeroLigne){
-		//TODO 
-		return false;
+	/**
+	 * Verifie si la ligne passee en parametre repond au condition d unicite de chiffre
+	 * @param numeroLigne
+	 * @return
+	 */
+	public boolean isLigneValide(int numeroLigne)
+	{
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for(int iBcl=0; iBcl<9;iBcl++){
+			if(cases[iBcl][numeroLigne].getNombre()!=0){ //Si la case n'est pas vide
+				if(list.contains(cases[iBcl][numeroLigne].getNombre())){ //Si la case contient un nombre deja dans la liste
+					return false;
+				}
+				else{
+					list.add(cases[iBcl][numeroLigne].getNombre());
+				}
+			}
+		}
+		return true;
 	}
 	
-	public boolean verifierColonne(int numeroColonne){
-		//TODO 
-		return false;
+	/**
+	 * Verifie si la colonne passee en parametre repond a la condition d unicite de chiffre
+	 * @param numeroColonne
+	 * @return
+	 */
+	public boolean isColonneValide(int numeroColonne){
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for(int iBcl=0; iBcl<9;iBcl++){
+			if(cases[numeroColonne][iBcl].getNombre()!=0){ //Sila case n'est pas vide
+				if(list.contains(cases[numeroColonne][iBcl].getNombre())){ //Si la case contient un nombre deja dans la liste 
+					return false;
+				}
+				else{
+					list.add(cases[numeroColonne][iBcl].getNombre());
+				}
+			}
+		}
+		return true;
 	}
 	
-	public boolean verifierRegion(int numeroRegion){
-		//TODO 
-		return false;
+	/**
+	 * Verifie si une region est valide	
+	 * @param numeroRegion doit etre compris entre 1 et 9
+	 * @return
+	 */
+	public boolean isRegionValide(int numeroRegion){
+		int xI = 0,xF= 0,yI= 0,yF= 0;
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		switch(numeroRegion)
+		{
+			case 1:
+				xI = 0;
+				yI = 0;
+				break;
+			case 2:
+				xI = 3;
+				yI = 0;
+				break;
+			case 3:
+				xI = 6;
+				yI = 0;
+				break;
+			case 4:
+				xI = 0;
+				yI = 3;
+				break;
+			case 5:
+				xI = 3;
+				yI = 3;
+				break;
+			case 6:
+				xI = 6;
+				yI = 3;
+				break;
+			case 7:
+				xI = 0;
+				yI = 6;
+				break;
+			case 8:
+				xI = 3;
+				yI = 6;
+				break;
+			case 9:
+				xI = 6;
+				yI = 6;
+				break;
+		}
+		xF = xI + 2;
+		yF = xI + 2;
+		for(int i = xI; i < xF;i++){
+			for(int j = yI; j<yF; j++){
+				if(cases[i][j].getNombre()!=0){ //Sila case n'est pas vide
+					if(list.contains(cases[i][j].getNombre())){ //Si la case contient un nombre deja dans la liste 
+						return false;
+					}
+					else{
+						list.add(cases[i][j].getNombre());
+					}
+				}
+			}
+		}
+		return true;
 	}
 
 	public Case[][] getCases() {
