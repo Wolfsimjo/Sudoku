@@ -135,8 +135,14 @@ public class Grille extends Observable implements Serializable{
 	 * @return
 	 */
 	static public Grille arrayToGrille(int[][] array){
-		//TODO Fonction de conversion de la grille (vers Grille)
-		return null;
+		Grille tmpGrille = new Grille();
+		
+		for(int i = 0; i< array.length;i++){
+			for(int j = 0; j < array[i].length;j++){
+				tmpGrille.getCase(i, j).setNombre(array[i][j]);
+			}
+		}
+		return tmpGrille;
 	}
 	/**
 	 * Verifie si la ligne passee en parametre repond au condition d unicite de chiffre
@@ -188,7 +194,7 @@ public class Grille extends Observable implements Serializable{
 		int xI = 0,xF= 0,yI= 0,yF= 0;
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		
-		switch(numeroRegion)
+		switch(numeroRegion) //Peut etre a revoir
 		{
 			case 1:
 				xI = 0;
