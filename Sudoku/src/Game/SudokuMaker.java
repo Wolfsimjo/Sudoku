@@ -7,8 +7,9 @@ import models.Grille;
 
 public class SudokuMaker {
 	public Grille creerGrille(){
-		//TODO
-		return null;
+		int[][] arrayTmp = remplirGrille(9);
+		//TODO vider la grille
+		return Grille.arrayToGrille(arrayTmp);
 	}
 	
 	public int[][] remplirZone(int tailleZone, int tailleGrille){

@@ -118,9 +118,9 @@ public class Grille extends Observable implements Serializable{
 	 * @param grille
 	 * @return
 	 */
-	static public Integer[][] grilleToArray(Grille grille){
+	static public int[][] grilleToArray(Grille grille){
 		Case[][] tmp = grille.cases;
-		Integer[][] array = new Integer[9][9];
+		int[][] array = new int[9][9];
 		for(int i = 0; i< tmp.length;i++){
 			for(int j = 0; j < tmp[i].length;j++){
 				array[tmp[i][j].getPositionX()][tmp[i][j].getPositionY()] = tmp[i][j].getNombre();
@@ -140,6 +140,9 @@ public class Grille extends Observable implements Serializable{
 		for(int i = 0; i< array.length;i++){
 			for(int j = 0; j < array[i].length;j++){
 				tmpGrille.getCase(i, j).setNombre(array[i][j]);
+				if(array[i][j] != 0){ //Rend non modifiable les cases pleines
+					tmpGrille.getCase(i, j).setModifiable(false);
+				}
 			}
 		}
 		return tmpGrille;
@@ -237,7 +240,7 @@ public class Grille extends Observable implements Serializable{
 		yF = xI + 2;
 		for(int i = xI; i < xF;i++){
 			for(int j = yI; j<yF; j++){
-				if(cases[i][j].getNombre()!=0){ //Sila case n'est pas vide
+				if(cases[i][j].getNombre()!=0){ //Si la case n'est pas vide
 					if(list.contains(cases[i][j].getNombre())){ //Si la case contient un nombre deja dans la liste 
 						return false;
 					}

@@ -3,12 +3,25 @@ package Game;
 import models.Grille;
 
 public class SudokuSolver {
+	
+	/**
+	 * Methode qui resoud la grille
+	 * @param grille
+	 * @return
+	 */
 	public Grille resoudreGrille(Grille grille){
-		//TODO
-		return grille;		
+		int[][] arrayTmp = Grille.grilleToArray(grille);
+		this.firtsAlgo(arrayTmp, 0);
+		return Grille.arrayToGrille(arrayTmp);		
 	}
 	
-	
+	/**
+	 * Verifie que le nombre passe en parametre n est pas sur la ligne
+	 * @param k
+	 * @param grille
+	 * @param i
+	 * @return
+	 */
 	public boolean absentSurLigne (int k, int grille[][], int i)
 	{
 	    for (int j=0; j < 9; j++)
@@ -19,6 +32,13 @@ public class SudokuSolver {
 	    return true;
 	}
 
+	/**
+	 * Verifie que le nombre passe en parametre n est pas sur la colonne
+	 * @param k
+	 * @param grille
+	 * @param j
+	 * @return
+	 */
 	public boolean absentSurColonne (int k, int[][] grille, int j)
 	{
 	    for (int i=0; i < 9; i++)
@@ -29,6 +49,14 @@ public class SudokuSolver {
 	    return true;
 	}
 
+	/**
+	 * Verifie que le nombre n est pas present sur le bloc considere
+	 * @param k
+	 * @param grille
+	 * @param i
+	 * @param j
+	 * @return
+	 */
 	public boolean absentSurBloc (int k, int grille[][], int i, int j)
 	{
 	    int _i = i-(i%3), _j = j-(j%3);  // ou encore : _i = 3*(i/3), _j = 3*(j/3);
