@@ -6,10 +6,11 @@ import java.util.Random;
 import models.Grille;
 
 public class SudokuMaker {
-	public Grille creerGrille(){
-		int[][] arrayTmp = remplirGrille(9);
+	public Grille creerGrille(Difficulte dif){
+		/*int[][] arrayTmp = remplirGrille(9);
 		//TODO vider la grille
-		return Grille.arrayToGrille(arrayTmp);
+		return Grille.arrayToGrille(arrayTmp);*/
+		return Grille.arrayToGrille(new GrilleStore().choixGrille(dif));
 	}
 	
 	public int[][] remplirZone(int tailleZone, int tailleGrille){
