@@ -1,8 +1,12 @@
 package controllers;
 
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import javax.swing.JFileChooser;
 
+import Game.GestionSauvegarde;
 import models.Grille;
 import views.InterfaceMenu;
 
@@ -47,7 +51,7 @@ public class MenuController implements ActionListener {
 	 */
 	private void nouvellePartie() {
 		// TODO Générer une nouvelle grille
-		
+
 	}
 
 	/**
@@ -55,15 +59,37 @@ public class MenuController implements ActionListener {
 	 */
 	private void ouvrir() {
 		// TODO ouvrir une grille sauvegardée
+		JFileChooser dialogue = new JFileChooser(new File("."+File.separator));
+		dialogue.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		
+		if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+		    grille = GestionSauvegarde.charger(dialogue.getSelectedFile());
+		   
+		}
 	}
 
 	/**
 	 * Sauvegarder la partie en cours
 	 */
 	private void sauvegarder() {
-		// TODO sauvegarde de la grille dans un fichier
 		
+		try{
+		   JFileChooser chooser = new JFileChooser();
+		   //Dossier Courant
+		   chooser.setCurrentDirectory(new  File("."+File.separator)); 
+		            
+		   //Affichage et récupération de la réponse de l'utilisateur
+		   int reponse = chooser.showDialog(chooser,"Enregistrer sous");
+		     
+		   //Si l'utilisateur clique sur OK
+			if(reponse == JFileChooser.APPROVE_OPTION){
+			  //Récupération du chemin du fichier
+			  GestionSauvegarde.sauvegarder(grille, chooser.getSelectedFile());
+			}
+		}catch(HeadlessException he){
+		          he.printStackTrace();
+		}
+		// TODO sauvegarde de la grille dans un fichier
 	}
 
 	/**

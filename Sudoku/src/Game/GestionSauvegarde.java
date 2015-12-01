@@ -11,7 +11,7 @@ import models.Grille;
 
 public class GestionSauvegarde {
 	
-	public void sauvegarder(Grille grille, File file){	
+	static public void sauvegarder(Grille grille, File file){	
 		ObjectOutputStream oos = null;
 		
 		try
@@ -40,7 +40,7 @@ public class GestionSauvegarde {
 				
 	}
 	
-	public Grille  charger(File file)
+	static public Grille  charger(File file)
 	{	
 		    ObjectInputStream ois = null;
 

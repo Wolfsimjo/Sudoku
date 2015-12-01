@@ -2,17 +2,11 @@ package views;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
 
-import controllers.GameKeyboardController;
-import controllers.GameMouseController;
 import models.Case;
 import models.Grille;
 
