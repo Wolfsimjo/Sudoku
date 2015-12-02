@@ -38,8 +38,8 @@ public class GameMouseController implements MouseListener {
 		
 		int x = e.getX();
 		int y = e.getY();
-		int positionX = (int) Math.floor((double)(x - Case.margin) / Case.size);
-		int positionY = (int) Math.floor((double)(y - Case.margin) / Case.size);
+		int positionX = (int) Math.floor((double)(x - Case.marginHorizontal) / Case.size);
+		int positionY = (int) Math.floor((double)(y - Case.marginVertical) / Case.size);
 		ij.nouvelleCase = grille.getCase(positionX, positionY);
 		if (ij.nouvelleCase != null) {
 			ij.nouvelleCase.setSelected(true);

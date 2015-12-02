@@ -97,12 +97,12 @@ public class MenuController implements ActionListener {
 	 * Ouvrir une partie sauvegardée
 	 */
 	private void ouvrir() {
-		// TODO ouvrir une grille sauvegardée
 		JFileChooser dialogue = new JFileChooser(new File("."+File.separator));
 		dialogue.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		
 		if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-		    grille = GestionSauvegarde.charger(dialogue.getSelectedFile());
+			Grille newGrille = GestionSauvegarde.charger(dialogue.getSelectedFile());
+			this.grille.setCases(newGrille.getCases());
 		}
 	}
 

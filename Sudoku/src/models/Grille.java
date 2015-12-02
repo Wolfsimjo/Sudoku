@@ -72,7 +72,7 @@ public class Grille extends Observable implements Serializable{
 		g.setStroke(new BasicStroke(epaisseur));
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				g.drawRect(Case.margin + i * Case.size*3, Case.margin + j * Case.size*3, Case.size*3, Case.size*3);
+				g.drawRect(Case.marginHorizontal + i * Case.size*3, Case.marginVertical + j * Case.size*3, Case.size*3, Case.size*3);
 			}
 		}
 		g.setStroke(oldStroke);

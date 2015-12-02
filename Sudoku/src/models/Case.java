@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.io.Serializable;
 
+import views.InterfaceGraphique;
+
 public class Case  implements Serializable{
 	private static final long serialVersionUID = 5L;
 
@@ -27,9 +29,12 @@ public class Case  implements Serializable{
 	private int positionY;
 	
 	// Taille de la case
-	public static final int size = 70;
-	// Marge à gauche et en haut du Sudoku
-	public static final int margin = (int) (1000 - 9*size) / 2; // Centre le sudoku
+	public static int size = (int) InterfaceGraphique.windowSizeX * InterfaceGraphique.windowSizeY / 14286;
+	// Marge à gauche et en haut du Sudoku	
+	public static int marginHorizontal = (int) (InterfaceGraphique.windowSizeX - 9*size) / 2;
+	public static int marginVertical = (int) (InterfaceGraphique.windowSizeY - 9*size) / 2;
+	// Taille des chiffres
+	public static int fontSize = (int) (size / 2.8);
 	
 	/**
 	 * Constructeur pour case modifiable
@@ -73,7 +78,7 @@ public class Case  implements Serializable{
 	public void draw(Graphics2D g, int colonne, int ligne) {
 		
 		g.setColor(Color.WHITE);
-		g.fillRect(margin + colonne * size, margin + ligne * size, size, size);
+		g.fillRect(marginHorizontal + colonne * size, marginVertical + ligne * size, size, size);
 		
 		Stroke oldStroke = g.getStroke();
 		if (this.isSelected()) {
@@ -82,7 +87,7 @@ public class Case  implements Serializable{
 		}
 		else
 			g.setColor(Color.BLACK);
-		g.drawRect(margin + colonne * size, margin + ligne *size, size, size);
+		g.drawRect(marginHorizontal + colonne * size, marginVertical + ligne *size, size, size);
 		g.setStroke(oldStroke);
 		g.setColor(Color.BLACK);
 		
@@ -90,8 +95,8 @@ public class Case  implements Serializable{
 		if (this.nombre > 0 && this.nombre <= 9) {
 			if (this.isModifiable())
 				g.setColor(Color.RED);
-			g.setFont(new Font("TimesRoman", Font.PLAIN, 25)); 
-			g.drawString(Integer.toString(this.nombre), margin + colonne * size + (int)(size / 2.5), margin + ligne * size + (int)(size / 2.5) + 10);
+			g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize)); 
+			g.drawString(Integer.toString(this.nombre), marginHorizontal + colonne * size + (int)(size / 2.5), marginVertical + ligne * size + (int)(size / 2.5) + 10);
 			g.setColor(Color.BLACK);
 		}
 		

@@ -2,9 +2,11 @@ package views;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import models.Case;
@@ -27,13 +29,17 @@ public class InterfaceJeu extends JPanel implements Observer {
 		this.nouvelleCase = null;
 		this.setFocusable(true);
 		this.requestFocusInWindow();
-				
+		
 	}
 	
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		Image img = new ImageIcon(this.getClass().getResource("/images/Background.png")).getImage();
+		
 		Graphics2D g2d = (Graphics2D) g;
+		
+		g2d.drawImage(img, 0, 0, getWidth(), getHeight(), this);
 		
 		this.grille.draw(g2d);
 	}
