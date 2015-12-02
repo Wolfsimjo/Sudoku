@@ -272,6 +272,21 @@ public class Grille extends Observable implements Serializable{
 		}
 		return true;
 	}
+	
+	/**
+	 * Methode qui verifie que la grille est rempli
+	 * @return
+	 */
+	public boolean isGrilleFull(){
+		for(int i = 0; i < cases.length;i++){
+			for(int j = 0; j < cases[i].length; j++){
+				if(cases[i][j].getNombre() == 0){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 
 	public Case[][] getCases() {
 		return cases;
