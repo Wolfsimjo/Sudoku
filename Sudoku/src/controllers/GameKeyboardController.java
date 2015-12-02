@@ -39,41 +39,43 @@ public class GameKeyboardController implements KeyListener {
 				grille.setCase(ij.ancienneCase);
 			}
 			
-			int x = ij.ancienneCase.getPositionX();
-			int y = ij.ancienneCase.getPositionY();
-			switch (e.getKeyCode()) {
-				case 37:
-					if (x > 0)
-						x--;
-					else
-						x=8;
-					break;
-				case 38:
-					if (y > 0)
-						y--;
-					else
-						y=8;
-					break;
-				case 39:
-					if (x < 8)
-						x++;
-					else
-						x=0;
-					break;
-				case 40:
-					if (y < 8)
-						y++;
-					else
-						y=0;
-					break;
-				default:
-					break;
-			}
-			
-			ij.nouvelleCase = grille.getCase(x, y);
-			if (ij.nouvelleCase != null) {
-				ij.nouvelleCase.setSelected(true);
-				grille.setCase(ij.nouvelleCase);
+			if (ij.ancienneCase != null) {
+				int x = ij.ancienneCase.getPositionX();
+				int y = ij.ancienneCase.getPositionY();
+				switch (e.getKeyCode()) {
+					case 37:
+						if (x > 0)
+							x--;
+						else
+							x=8;
+						break;
+					case 38:
+						if (y > 0)
+							y--;
+						else
+							y=8;
+						break;
+					case 39:
+						if (x < 8)
+							x++;
+						else
+							x=0;
+						break;
+					case 40:
+						if (y < 8)
+							y++;
+						else
+							y=0;
+						break;
+					default:
+						break;
+				}
+				
+				ij.nouvelleCase = grille.getCase(x, y);
+				if (ij.nouvelleCase != null) {
+					ij.nouvelleCase.setSelected(true);
+					grille.setCase(ij.nouvelleCase);
+				}
 			}
 		}
 		
