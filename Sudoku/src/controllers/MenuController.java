@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import Game.GestionSauvegarde;
 import models.Grille;
@@ -50,8 +51,24 @@ public class MenuController implements ActionListener {
 	 * Lancement d'une nouvelle partie
 	 */
 	private void nouvellePartie() {
-		// TODO Générer une nouvelle grille
-
+		String[] options = {
+				"FACILE",
+				"MOYEN",
+				"DIFFICILE"
+		};
+		
+		int difficulty = JOptionPane.showOptionDialog(
+				menu, 
+				"Choisissez la difficulté :", 
+				"Difficulté", 
+				JOptionPane.DEFAULT_OPTION, 
+				JOptionPane.QUESTION_MESSAGE,
+				null, 
+				options, 
+				options[0]);
+		
+		//TODO: Générer grille en fonction de la difficulté
+		
 	}
 
 	/**
@@ -96,16 +113,46 @@ public class MenuController implements ActionListener {
 	 * Quitter le jeu
 	 */
 	private void quitter() {
-		sauvegarder();
-		System.exit(0);
+		String[] options = {
+			"Oui",
+			"Non",
+			"Annuler"
+		};
+		
+		int response = JOptionPane.showOptionDialog(
+				menu, 
+				"Voulez-vous sauvegarder votre progression avant de quitter ?",
+				"Quitter",
+				JOptionPane.YES_NO_CANCEL_OPTION,
+				JOptionPane.WARNING_MESSAGE,
+				null,
+				options,
+				options[0]
+				);
+		
+		if (response == 0) {
+			sauvegarder();
+			// TODO: Ne pas quitter si la sauvegarde n'a pas été effectuée => Changer le retour de sauvegarder()
+			System.exit(0);
+		} else if (response == 1) {
+			System.exit(0);
+		}
+		
 	}
 
 	/**
 	 * Afficher les règles
 	 */
 	private void afficherRegles() {
-		// TODO Auto-generated method stub
-		
+		// TODO: Générer une fenêtre popup avec les  regles	
+		/*
+			Les règles du sudoku sont très simples. 
+			Un sudoku classique contient neuf lignes et neuf colonnes, donc 81 cases au total.
+
+			Le but du jeu est de remplir ces cases avec des chiffres allant de 1 à 9 en veillant toujours 
+			à ce qu'un même chiffre ne figure qu'une seule fois par colonne, 
+			une seule fois par ligne, et une seule fois par carré de neuf cases.
+		 * */
 	}
 
 }
