@@ -1,6 +1,7 @@
 package models;
 
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.io.Serializable;
@@ -11,7 +12,7 @@ public class Grille extends Observable implements Serializable{
 	private static final long serialVersionUID = 2L;
 
 	private Case[][] cases;
-	
+		
 	/**
 	 * Constructeur de grille vide
 	 */
@@ -75,6 +76,27 @@ public class Grille extends Observable implements Serializable{
 				g.drawRect(Case.marginHorizontal + i * Case.size*3, Case.marginVertical + j * Case.size*3, Case.size*3, Case.size*3);
 			}
 		}
+		
+		if (this.isGrilleFull()) {
+			String validity = this.isGrilleValide();
+			
+			if (validity.charAt(0) == 'F') {
+				g.setStroke(new BasicStroke(5));
+				g.setColor(Color.RED);
+				
+				char zone = validity.charAt(1);
+				int nb = Character.getNumericValue(validity.charAt(2));
+				
+				if (zone == 'C') {
+					g.drawRect(Case.marginHorizontal + nb * Case.size, Case.marginVertical, Case.size, Case.size*9);
+				} else if (zone == 'L') {
+					g.drawRect(Case.marginHorizontal, Case.marginVertical + nb * Case.size, Case.size*9, Case.size);
+				} else if (zone == 'R') {
+					g.drawRect(Case.marginHorizontal + (nb%3) * 3 * Case.size, Case.marginVertical + (nb%3) * 3 * Case.size, Case.size*3, Case.size*3);
+				}
+			}
+		}
+		
 		g.setStroke(oldStroke);
 	}
 	
@@ -108,7 +130,7 @@ public class Grille extends Observable implements Serializable{
 				this.cases[positionX][positionY] = c;
 			}
 		}
-		
+				
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -219,49 +241,50 @@ public class Grille extends Observable implements Serializable{
 		
 		switch(numeroRegion) //Peut etre a revoir
 		{
-			case 1:
+			case 0:
 				xI = 0;
+				yI = 0;
+				break;
+			case 1:
+				xI = 3;
 				yI = 0;
 				break;
 			case 2:
-				xI = 3;
+				xI = 6;
 				yI = 0;
 				break;
 			case 3:
-				xI = 6;
-				yI = 0;
+				xI = 0;
+				yI = 3;
 				break;
 			case 4:
-				xI = 0;
+				xI = 3;
 				yI = 3;
 				break;
 			case 5:
-				xI = 3;
-				yI = 3;
-				break;
-			case 6:
 				xI = 6;
 				yI = 3;
 				break;
-			case 7:
+			case 6:
 				xI = 0;
 				yI = 6;
 				break;
-			case 8:
+			case 7:
 				xI = 3;
 				yI = 6;
 				break;
-			case 9:
+			case 8:
 				xI = 6;
 				yI = 6;
 				break;
 		}
 		xF = xI + 2;
-		yF = xI + 2;
-		for(int i = xI; i < xF;i++){
-			for(int j = yI; j<yF; j++){
+		yF = yI + 2;
+		for(int i = xI; i <= xF; i++){
+			for(int j = yI; j <= yF; j++){
 				if(cases[i][j].getNombre()!=0){ //Si la case n'est pas vide
-					if(list.contains(cases[i][j].getNombre())){ //Si la case contient un nombre deja dans la liste 
+					if(list.contains(cases[i][j].getNombre())){ //Si la case contient un nombre deja dans la liste
+						System.out.println("i : "+i+" j : "+j);
 						return false;
 					}
 					else{
@@ -294,7 +317,7 @@ public class Grille extends Observable implements Serializable{
 
 	public void setCases(Case[][] cases) {
 		this.cases = cases;
-		
+				
 		// On notifie la nouvelle grille
 		this.setChanged();
 		this.notifyObservers();

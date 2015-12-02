@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import Game.Difficulte;
 import Game.GestionSauvegarde;
 import Game.GrilleStore;
+import models.Case;
 import models.Grille;
 import views.InterfaceMenu;
 
@@ -103,6 +104,12 @@ public class MenuController implements ActionListener {
 		
 		if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			Grille newGrille = GestionSauvegarde.charger(dialogue.getSelectedFile());
+			for (Case[] ligne : newGrille.getCases()) {
+				for (Case c : ligne) {
+					c.setSelected(false);
+					newGrille.setCase(c);
+				}
+			}
 			this.grille.setCases(newGrille.getCases());
 		}
 	}
@@ -161,9 +168,9 @@ public class MenuController implements ActionListener {
 		// Non => Quitter sans sauvegarder
 		// Annuler => Ne fais rien
 		if (response == 0) {
-			sauvegarder();
-			// TODO: Ne pas quitter si la sauvegarde n'a pas été effectuée => Changer le retour de sauvegarder()
-			System.exit(0);
+			boolean saved = sauvegarder();
+			if (saved)
+				System.exit(0);
 		} else if (response == 1) {
 			System.exit(0);
 		}

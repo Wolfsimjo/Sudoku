@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import models.Case;
@@ -17,12 +18,15 @@ public class InterfaceJeu extends JPanel implements Observer {
 	private static final long serialVersionUID = -894299279968533611L;
 	private Grille grille;
 	
+	private boolean grilleOver;
+	
 	// Ancienne case sélectionnée
 	public Case ancienneCase;
 	// Case couramment sélectionnée
 	public Case nouvelleCase;
 	
 	public InterfaceJeu(Grille grille) {
+		this.grilleOver = false;
 		
 		this.grille = grille;
 		this.ancienneCase = null;
@@ -47,6 +51,18 @@ public class InterfaceJeu extends JPanel implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		repaint();
+		
+		if (!grilleOver && this.grille.isGrilleFull()) {
+			if (this.grille.isGrilleValide().charAt(0) == 'T') {
+				this.grilleOver = true;
+				JOptionPane.showMessageDialog(
+						this, 
+						"Vous avez gagné !! Félicitations !",
+						"Champions !",
+						JOptionPane.INFORMATION_MESSAGE
+						);
+			}
+		}
 	}
 
 	public Case getAncienneCase() {

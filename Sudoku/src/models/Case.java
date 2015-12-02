@@ -136,8 +136,7 @@ public class Case  implements Serializable{
 	}
 
 	public void setSelected(boolean selected) {
-		if (this.modifiable)
-			this.selected = selected;
+		this.selected = selected;
 	}
 
 	public int getPositionX() {
