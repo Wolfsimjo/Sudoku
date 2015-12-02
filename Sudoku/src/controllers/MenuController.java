@@ -145,14 +145,13 @@ public class MenuController implements ActionListener {
 	 */
 	private void afficherRegles() {
 		// TODO: Générer une fenêtre popup avec les  regles	
-		/*
-			Les règles du sudoku sont très simples. 
-			Un sudoku classique contient neuf lignes et neuf colonnes, donc 81 cases au total.
-
-			Le but du jeu est de remplir ces cases avec des chiffres allant de 1 à 9 en veillant toujours 
-			à ce qu'un même chiffre ne figure qu'une seule fois par colonne, 
-			une seule fois par ligne, et une seule fois par carré de neuf cases.
-		 * */
+		String regle = "Les règles du sudoku sont très simples.\r\n"+ 
+			"Un sudoku classique contient neuf lignes et neuf colonnes, soit 81 cases au total.\r\n"+
+			"Le but du jeu est de remplir ces cases avec des chiffres allant de 1 à 9 en veillant toujours\r\n"+
+			"à ce qu'un même chiffre ne figure qu'une seule fois par colonne, \r\n"+
+			"une seule fois par ligne, et une seule fois par carré de neuf cases.\r\n";
+		
+		JOptionPane.showMessageDialog(menu, regle);
 	}
 
 }
