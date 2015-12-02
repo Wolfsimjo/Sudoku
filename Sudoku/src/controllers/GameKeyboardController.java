@@ -29,7 +29,6 @@ public class GameKeyboardController implements KeyListener {
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println(e.getKeyCode());
 		// Flèche : si on est au bord du sudoku à droite par exemple
 		// 			et qu'on utilise la flèche droite => on revient
 		//			au début de la ligne

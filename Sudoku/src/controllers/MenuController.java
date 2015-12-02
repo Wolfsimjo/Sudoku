@@ -7,7 +7,9 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import Game.Difficulte;
 import Game.GestionSauvegarde;
+import Game.GrilleStore;
 import models.Grille;
 import views.InterfaceMenu;
 
@@ -52,12 +54,13 @@ public class MenuController implements ActionListener {
 	 */
 	private void nouvellePartie() {
 		String[] options = {
-				"FACILE",
-				"MOYEN",
-				"DIFFICILE"
+				"Facile",
+				"Moyen",
+				"Difficile"
 		};
 		
-		int difficulty = JOptionPane.showOptionDialog(
+		// Affichage d'un menu popup pour le choix de la difficulté
+		int result = JOptionPane.showOptionDialog(
 				menu, 
 				"Choisissez la difficulté :", 
 				"Difficulté", 
@@ -67,7 +70,26 @@ public class MenuController implements ActionListener {
 				options, 
 				options[0]);
 		
-		//TODO: Générer grille en fonction de la difficulté
+		Difficulte difficulty;
+		switch (result) {
+			case 0:
+				difficulty = Difficulte.FACILE; 
+				break;
+			case 1:
+				difficulty = Difficulte.MOYEN;
+				break;
+			case 2:
+				difficulty = Difficulte.DIFICILLE;
+				break;
+			default:
+				difficulty = Difficulte.FACILE;
+				break;
+		}
+		
+		// Génération d'une grille aléatoire en fonction du niveau de difficulté
+		GrilleStore gs = new GrilleStore();
+		Grille newGrille = Grille.arrayToGrille(gs.choixGrille(difficulty));
+		this.grille.setCases(newGrille.getCases());
 		
 	}
 
@@ -81,7 +103,6 @@ public class MenuController implements ActionListener {
 		
 		if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 		    grille = GestionSauvegarde.charger(dialogue.getSelectedFile());
-		   
 		}
 	}
 
@@ -130,6 +151,9 @@ public class MenuController implements ActionListener {
 				options[0]
 				);
 		
+		// Oui => Quitter et sauvegarder
+		// Non => Quitter sans sauvegarder
+		// Annuler => Ne fais rien
 		if (response == 0) {
 			sauvegarder();
 			// TODO: Ne pas quitter si la sauvegarde n'a pas été effectuée => Changer le retour de sauvegarder()

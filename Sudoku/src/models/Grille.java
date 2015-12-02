@@ -272,5 +272,9 @@ public class Grille extends Observable implements Serializable{
 
 	public void setCases(Case[][] cases) {
 		this.cases = cases;
+		
+		// On notifie la nouvelle grille
+		this.setChanged();
+		this.notifyObservers();
 	}
 }
