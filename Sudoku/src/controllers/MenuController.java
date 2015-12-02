@@ -69,8 +69,8 @@ public class MenuController implements ActionListener {
 				null, 
 				options, 
 				options[0]);
-		
-		Difficulte difficulty;
+
+		Difficulte difficulty = null;
 		switch (result) {
 			case 0:
 				difficulty = Difficulte.FACILE; 
@@ -82,14 +82,15 @@ public class MenuController implements ActionListener {
 				difficulty = Difficulte.DIFICILLE;
 				break;
 			default:
-				difficulty = Difficulte.FACILE;
 				break;
 		}
 		
 		// Génération d'une grille aléatoire en fonction du niveau de difficulté
-		GrilleStore gs = new GrilleStore();
-		Grille newGrille = Grille.arrayToGrille(gs.choixGrille(difficulty));
-		this.grille.setCases(newGrille.getCases());
+		if (difficulty != null) {
+			GrilleStore gs = new GrilleStore();
+			Grille newGrille = Grille.arrayToGrille(gs.choixGrille(difficulty));
+			this.grille.setCases(newGrille.getCases());
+		}
 		
 	}
 
