@@ -109,7 +109,7 @@ public class MenuController implements ActionListener {
 	/**
 	 * Sauvegarder la partie en cours
 	 */
-	private void sauvegarder() {
+	private boolean sauvegarder() {
 		
 		try{
 		   JFileChooser chooser = new JFileChooser();
@@ -124,10 +124,15 @@ public class MenuController implements ActionListener {
 			  //Récupération du chemin du fichier
 			  GestionSauvegarde.sauvegarder(grille, chooser.getSelectedFile());
 			}
+			else if(reponse == JFileChooser.CANCEL_OPTION){
+				return false;
+			}
 		}catch(HeadlessException he){
 		          he.printStackTrace();
+		          return false;
 		}
 		// TODO sauvegarde de la grille dans un fichier
+		return true;
 	}
 
 	/**

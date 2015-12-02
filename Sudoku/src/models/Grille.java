@@ -151,13 +151,20 @@ public class Grille extends Observable implements Serializable{
 	/**
 	 * Verifie si la grille est valide
 	 */
-	public boolean isGrilleValide(){
-		for(int i = 0 ; i < 9 ; i++){
-			if(!(isColonneValide(i)&&isLigneValide(i)&&isRegionValide(i))){
-				return false;
+	public String isGrilleValide(){
+		for(int i = 0 ; i < 9 ; i++)
+		{
+			if(!(isColonneValide(i))){
+				return "FC"+i;
+			}
+			if(!(isLigneValide(i))){
+				return "FL"+i;
+			}
+			if(!isRegionValide(i)){
+				return "FR"+i;
 			}
 		}
-		return true;
+		return "T";
 	}
 	
 	/**
