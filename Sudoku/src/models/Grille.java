@@ -147,6 +147,19 @@ public class Grille extends Observable implements Serializable{
 		}
 		return tmpGrille;
 	}
+	
+	/**
+	 * Verifie si la grille est valide
+	 */
+	public boolean isGrilleValide(){
+		for(int i = 0 ; i < 9 ; i++){
+			if(!(isColonneValide(i)&&isLigneValide(i)&&isRegionValide(i))){
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	/**
 	 * Verifie si la ligne passee en parametre repond au condition d unicite de chiffre
 	 * @param numeroLigne
