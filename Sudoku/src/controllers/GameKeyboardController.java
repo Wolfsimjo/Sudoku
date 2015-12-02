@@ -29,23 +29,11 @@ public class GameKeyboardController implements KeyListener {
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
-		// Chiffre
-		if (e.getKeyCode() >= 96 && e.getKeyCode() <=105) {
-			char key = e.getKeyChar();			
-			int nb = Character.getNumericValue(key);
-			
-			if (ij.nouvelleCase != null) {
-				if (ij.nouvelleCase.isModifiable() && ij.nouvelleCase.isSelected()) {
-					ij.nouvelleCase.setNombre(nb);
-					grille.setCase(ij.nouvelleCase);
-				}
-			}
-		}
+		System.out.println(e.getKeyCode());
 		// Flèche : si on est au bord du sudoku à droite par exemple
 		// 			et qu'on utilise la flèche droite => on revient
 		//			au début de la ligne
-		else if (e.getKeyCode() >= 37 && e.getKeyCode() <= 40) {
+		if (e.getKeyCode() >= 37 && e.getKeyCode() <= 40) {
 			ij.ancienneCase = ij.nouvelleCase;
 			if (ij.ancienneCase != null) {
 				ij.ancienneCase.setSelected(false);
@@ -87,6 +75,23 @@ public class GameKeyboardController implements KeyListener {
 			if (ij.nouvelleCase != null) {
 				ij.nouvelleCase.setSelected(true);
 				grille.setCase(ij.nouvelleCase);
+			}
+		}
+		
+		// Chiffre
+		else {
+			char key = e.getKeyChar();			
+			int nb = Character.getNumericValue(key);
+			
+			// Backspace or del
+			if (e.getKeyCode() == 8 || e.getKeyCode() == 127)
+				nb = 0;
+			
+			if (ij.nouvelleCase != null && nb >= 0 && nb <= 9) {
+				if (ij.nouvelleCase.isModifiable() && ij.nouvelleCase.isSelected()) {
+					ij.nouvelleCase.setNombre(nb);
+					grille.setCase(ij.nouvelleCase);
+				}
 			}
 		}
 		
