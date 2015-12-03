@@ -239,45 +239,8 @@ public class Grille extends Observable implements Serializable{
 		int xI = 0,xF= 0,yI= 0,yF= 0;
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		
-		switch(numeroRegion) //Peut etre a revoir
-		{
-			case 0:
-				xI = 0;
-				yI = 0;
-				break;
-			case 1:
-				xI = 3;
-				yI = 0;
-				break;
-			case 2:
-				xI = 6;
-				yI = 0;
-				break;
-			case 3:
-				xI = 0;
-				yI = 3;
-				break;
-			case 4:
-				xI = 3;
-				yI = 3;
-				break;
-			case 5:
-				xI = 6;
-				yI = 3;
-				break;
-			case 6:
-				xI = 0;
-				yI = 6;
-				break;
-			case 7:
-				xI = 3;
-				yI = 6;
-				break;
-			case 8:
-				xI = 6;
-				yI = 6;
-				break;
-		}
+		xI = (numeroRegion%3)*3;
+		yI = (numeroRegion/3)*3;
 		xF = xI + 2;
 		yF = yI + 2;
 		for(int i = xI; i <= xF; i++){
