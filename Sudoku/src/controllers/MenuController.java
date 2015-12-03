@@ -4,8 +4,13 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import org.apache.commons.io.FilenameUtils;
 
 import Game.Difficulte;
 import Game.GestionSauvegarde;
@@ -99,18 +104,30 @@ public class MenuController implements ActionListener {
 	 * Ouvrir une partie sauvegardée
 	 */
 	private void ouvrir() {
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Sudoku Grid", "sg");
 		JFileChooser dialogue = new JFileChooser(new File("."+File.separator));
+		dialogue.setFileFilter(filter);
+		dialogue.setFileHidingEnabled(true);
+		dialogue.setAcceptAllFileFilterUsed(false);
 		dialogue.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		dialogue.setDialogTitle("Ouvrir une grille");
 		
 		if (dialogue.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-			Grille newGrille = GestionSauvegarde.charger(dialogue.getSelectedFile());
-			for (Case[] ligne : newGrille.getCases()) {
-				for (Case c : ligne) {
-					c.setSelected(false);
-					newGrille.setCase(c);
+			Grille newGrille;
+			try {
+				newGrille = GestionSauvegarde.charger(dialogue.getSelectedFile());
+				for (Case[] ligne : newGrille.getCases()) {
+					for (Case c : ligne) {
+						c.setSelected(false);
+						newGrille.setCase(c);
+					}
 				}
+				this.grille.setCases(newGrille.getCases());
+			} catch (ClassNotFoundException | IOException e) {
+				JOptionPane.showMessageDialog(menu, "Wrong file format.", "Warning", JOptionPane.WARNING_MESSAGE);
+				
 			}
-			this.grille.setCases(newGrille.getCases());
 		}
 	}
 
@@ -120,7 +137,15 @@ public class MenuController implements ActionListener {
 	private boolean sauvegarder() {
 		
 		try{
+			FileNameExtensionFilter filter = new FileNameExtensionFilter(
+	                "Sudoku Grid", "sg");
 		   JFileChooser chooser = new JFileChooser();
+		   chooser.setFileFilter(filter);
+		   chooser.setFileHidingEnabled(true);
+		   chooser.setAcceptAllFileFilterUsed(false);
+		   chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		   chooser.setDialogTitle("Sauvegarder une grille");
+			
 		   //Dossier Courant
 		   chooser.setCurrentDirectory(new  File("."+File.separator)); 
 		            
@@ -130,7 +155,12 @@ public class MenuController implements ActionListener {
 		   //Si l'utilisateur clique sur OK
 			if(reponse == JFileChooser.APPROVE_OPTION){
 			  //Récupération du chemin du fichier
-			  GestionSauvegarde.sauvegarder(grille, chooser.getSelectedFile());
+				File file = chooser.getSelectedFile();
+				if (!FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("sg")) //Verifie l extension du fichier
+				{
+				    file = new File(file.getParentFile(), FilenameUtils.getBaseName(file.getName())+".sg"); //Ajoute la bonne extension
+				}
+			  GestionSauvegarde.sauvegarder(grille, file);
 			}
 			else if(reponse == JFileChooser.CANCEL_OPTION){
 				return false;

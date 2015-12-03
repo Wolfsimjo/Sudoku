@@ -40,28 +40,15 @@ public class GestionSauvegarde {
 				
 	}
 	
-	static public Grille  charger(File file)
+	static public Grille  charger(File file) throws IOException,ClassNotFoundException
 	{	
-		    ObjectInputStream ois = null;
-
-		    try {
-		      final FileInputStream fichier = new FileInputStream(file);
-		      ois = new ObjectInputStream(fichier);
-		      final Grille uneGrille = (Grille) ois.readObject();
-		      return uneGrille;
-		    } catch (final java.io.IOException e) {
-		      e.printStackTrace();
-		    } catch (final ClassNotFoundException e) {
-		      e.printStackTrace();
-		    } finally {
-		      try {
-		        if (ois != null) {
-		          ois.close();
-		        }
-		      } catch (final IOException ex) {
-		        ex.printStackTrace();
-		      }
-		    }
-		return null;
+		ObjectInputStream ois = null;
+		final FileInputStream fichier = new FileInputStream(file);
+		ois = new ObjectInputStream(fichier);
+		final Grille uneGrille = (Grille) ois.readObject();
+		if (ois != null) {
+		      ois.close();
+		}
+		return uneGrille;
 	}
 }
