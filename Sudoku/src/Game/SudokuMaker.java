@@ -8,7 +8,6 @@ import models.Grille;
 public class SudokuMaker {
 	public Grille creerGrille(Difficulte dif){
 		/*int[][] arrayTmp = remplirGrille(9);
-		//TODO vider la grille
 		return Grille.arrayToGrille(arrayTmp);*/
 		return Grille.arrayToGrille(new GrilleStore().choixGrille(dif));
 	}

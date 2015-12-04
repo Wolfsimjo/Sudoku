@@ -35,9 +35,7 @@ public class GestionSauvegarde {
 			catch (final IOException ex) {
 		    ex.printStackTrace();
 		  }
-		}
-		//TODO
-				
+		}				
 	}
 	
 	static public Grille  charger(File file) throws IOException,ClassNotFoundException

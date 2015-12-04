@@ -15,6 +15,7 @@ import org.apache.commons.io.FilenameUtils;
 import Game.Difficulte;
 import Game.GestionSauvegarde;
 import Game.GrilleStore;
+import Game.SudokuSolver;
 import models.Case;
 import models.Grille;
 import views.InterfaceMenu;
@@ -25,8 +26,8 @@ import views.InterfaceMenu;
  */
 public class MenuController implements ActionListener {
 	
-	InterfaceMenu menu;
-	Grille grille;
+	private InterfaceMenu menu;
+	private Grille grille;
 
 	/**
 	 * On initialise le controleur avec le menu et la grille
@@ -52,6 +53,10 @@ public class MenuController implements ActionListener {
 			quitter();
 		else if (e.getSource() == menu.getSsMenuRegles())
 			afficherRegles();
+		else if(e.getSource() == menu.getSsMenuResoudre())
+			demandeResoudre();
+		else if(e.getSource() == menu.getSsMenuResolution())
+			resoudre();
 		
 	}
 
@@ -169,7 +174,6 @@ public class MenuController implements ActionListener {
 		          he.printStackTrace();
 		          return false;
 		}
-		// TODO sauvegarde de la grille dans un fichier
 		return true;
 	}
 
@@ -210,15 +214,33 @@ public class MenuController implements ActionListener {
 	/**
 	 * Afficher les règles
 	 */
-	private void afficherRegles() {
-		// TODO: Générer une fenêtre popup avec les  regles	
-		String regle = "Les règles du sudoku sont très simples.\r\n"+ 
+	private void afficherRegles() {	
+		String regle = "Les regles du sudoku sont tres simples.\r\n"+ 
 			"Un sudoku classique contient neuf lignes et neuf colonnes, soit 81 cases au total.\r\n"+
-			"Le but du jeu est de remplir ces cases avec des chiffres allant de 1 à 9 en veillant toujours\r\n"+
-			"à ce qu'un même chiffre ne figure qu'une seule fois par colonne, \r\n"+
-			"une seule fois par ligne, et une seule fois par carré de neuf cases.\r\n";
+			"Le but du jeu est de remplir ces cases avec des chiffres allant de 1 a� 9 en veillant\r\n"+
+			"toujours a� ce qu'un meme chiffre ne figure qu'une seule fois par colonne, une seule\r\n"+
+			"fois par ligne et une seule fois par carre de neuf cases.\r\n";
 		
 		JOptionPane.showMessageDialog(menu, regle);
 	}
-
+	
+	/**
+	 * Passe en mode solveur
+	 */
+	private void demandeResoudre(){
+		JOptionPane.showMessageDialog(menu, 
+				"Veuillez rentrer une grille a resoudre et selectionner \"Lancer execution\" dans le menu resoudre.");
+		this.menu.getMenuResoudre().setEnabled(true);
+		this.grille.setCases(new Grille().getCases()); //Remise � zero de la grille
+	}
+	
+	/**
+	 * Lance la resolution
+	 */
+	private void resoudre(){
+		this.menu.getMenuResoudre().setEnabled(false);
+		int[][] tmparray = Grille.grilleToArray(grille);
+		new SudokuSolver().firtsAlgo(tmparray, 0);  //Lancement de l'algorithme de resolution
+		this.grille.setCases(Grille.arrayToGrille(tmparray).getCases());
+	}
 }
