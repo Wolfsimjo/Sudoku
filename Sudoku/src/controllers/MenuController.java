@@ -90,7 +90,7 @@ public class MenuController implements ActionListener {
 				difficulty = Difficulte.MOYEN;
 				break;
 			case 2:
-				difficulty = Difficulte.DIFICILLE;
+				difficulty = Difficulte.DIFFICILE;
 				break;
 			default:
 				break;
@@ -98,8 +98,7 @@ public class MenuController implements ActionListener {
 		
 		// GÃ©nÃ©ration d'une grille alÃ©atoire en fonction du niveau de difficultÃ©
 		if (difficulty != null) {
-			GrilleStore gs = new GrilleStore();
-			Grille newGrille = Grille.arrayToGrille(gs.choixGrille(difficulty));
+			Grille newGrille = Grille.arrayToGrille(GrilleStore.choixGrille(difficulty));
 			this.grille.setCases(newGrille.getCases());
 		}
 		
@@ -217,8 +216,8 @@ public class MenuController implements ActionListener {
 	private void afficherRegles() {	
 		String regle = "Les regles du sudoku sont tres simples.\r\n"+ 
 			"Un sudoku classique contient neuf lignes et neuf colonnes, soit 81 cases au total.\r\n"+
-			"Le but du jeu est de remplir ces cases avec des chiffres allant de 1 a  9 en veillant\r\n"+
-			"toujours a  ce qu'un meme chiffre ne figure qu'une seule fois par colonne, une seule\r\n"+
+			"Le but du jeu est de remplir ces cases avec des chiffres allant de 1 aï¿½ 9 en veillant\r\n"+
+			"toujours aï¿½ ce qu'un meme chiffre ne figure qu'une seule fois par colonne, une seule\r\n"+
 			"fois par ligne et une seule fois par carre de neuf cases.\r\n";
 		
 		JOptionPane.showMessageDialog(menu, regle);
@@ -231,7 +230,7 @@ public class MenuController implements ActionListener {
 		JOptionPane.showMessageDialog(menu, 
 				"Veuillez rentrer une grille a resoudre et selectionner \"Lancer execution\" dans le menu resoudre.");
 		this.menu.getMenuResoudre().setEnabled(true);
-		this.grille.setCases(new Grille().getCases()); //Remise à zero de la grille
+		this.grille.setCases(new Grille().getCases()); //Remise ï¿½ zero de la grille
 	}
 	
 	/**
