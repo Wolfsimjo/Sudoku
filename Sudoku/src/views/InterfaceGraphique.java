@@ -67,23 +67,4 @@ public class InterfaceGraphique extends JFrame{
 		this.ij.addMouseListener(gm);
 		this.menu.addMenuController(mc);
 	}
-	
-	public static void main(String[] args) {
-		
-		// Modèle
-		Grille model = new Grille();
-		
-		// Vues
-		InterfaceJeu ij = new InterfaceJeu(model);
-		InterfaceMenu menu = new InterfaceMenu();
-		InterfaceGraphique ig = new InterfaceGraphique(ij, menu);
-		
-		// Controleurs
-		GameKeyboardController gk = new  GameKeyboardController(ij, model);
-		GameMouseController gm = new GameMouseController(ij, model);
-		MenuController mc = new MenuController(menu, model);
-		
-		model.addObserver(ij);
-		ig.addControllers(gk, gm, mc);
-	}
 }

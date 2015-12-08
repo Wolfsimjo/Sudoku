@@ -1,56 +1,31 @@
 package Game;
 
+import controllers.GameKeyboardController;
+import controllers.GameMouseController;
+import controllers.MenuController;
 import models.Grille;
 import views.InterfaceGraphique;
+import views.InterfaceJeu;
+import views.InterfaceMenu;
 
 public class Sudoku {
-	private Grille grille;
-	private Difficulte niveauDifficulte;
-	private InterfaceGraphique gui;
 	
-	public Sudoku(Difficulte niveauDifficulte) {
-		super();
-		this.setNiveauDifficulte(niveauDifficulte);
-	}
-
-	public Sudoku(Grille grille) {
-		super();
-		this.setGrille(grille);
-	}
-
-	public void resetGrille(){
+	public static void main(String[] args) {
+		// Modèle
+		Grille model = new Grille();
 		
-	}
-	
-	public void creerGrille(){
+		// Vues
+		InterfaceJeu ij = new InterfaceJeu(model);
+		InterfaceMenu menu = new InterfaceMenu();
+		InterfaceGraphique ig = new InterfaceGraphique(ij, menu);
 		
+		// Controleurs
+		GameKeyboardController gk = new  GameKeyboardController(ij, model);
+		GameMouseController gm = new GameMouseController(ij, model);
+		MenuController mc = new MenuController(menu, model);
+		
+		model.addObserver(ij);
+		ig.addControllers(gk, gm, mc);
 	}
 	
-	public void resoudreGrille(){
-		
-	}
-
-	public Grille getGrille() {
-		return grille;
-	}
-
-	public void setGrille(Grille grille) {
-		this.grille = grille;
-	}
-
-	public Difficulte getNiveauDifficulte() {
-		return niveauDifficulte;
-	}
-
-	public void setNiveauDifficulte(Difficulte niveauDifficulte) {
-		this.niveauDifficulte = niveauDifficulte;
-	}
-
-	public InterfaceGraphique getGui() {
-		return gui;
-	}
-
-	public void setGui(InterfaceGraphique gui) {
-		this.gui = gui;
-	}
 }
