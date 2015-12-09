@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -106,7 +104,7 @@ public class MenuController implements ActionListener {
 				Grille newGrille = Grille.arrayToGrille(grilleArray);
 				this.grille.setCases(newGrille.getCases());
 			} else {
-				JOptionPane.showMessageDialog(menu, Charset.forName("UTF-8").encode("Vous n'\u00eates pas connect\u00e9 à Internet"), "Warning", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(menu, "Vous n'\u00eates pas connect\u00e9 \u00e0 Internet", "Warning", JOptionPane.WARNING_MESSAGE);
 			}
 		}
 		

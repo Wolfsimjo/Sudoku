@@ -9,7 +9,6 @@ import controllers.GameKeyboardController;
 import controllers.GameMouseController;
 import controllers.MenuController;
 import models.Case;
-import models.Grille;
 
 public class InterfaceGraphique extends JFrame{
 	
