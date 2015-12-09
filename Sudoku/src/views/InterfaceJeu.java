@@ -57,7 +57,7 @@ public class InterfaceJeu extends JPanel implements Observer {
 				this.grilleOver = true;
 				JOptionPane.showMessageDialog(
 						this, 
-						"Vous avez gagné !! Félicitations !",
+						"Vous avez gagn\u00e9 !! F\u00e9licitations !",
 						"Champions !",
 						JOptionPane.INFORMATION_MESSAGE
 						);

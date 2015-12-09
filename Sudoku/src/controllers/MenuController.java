@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -73,8 +75,8 @@ public class MenuController implements ActionListener {
 		// Affichage d'un menu popup pour le choix de la difficulté
 		int result = JOptionPane.showOptionDialog(
 				menu, 
-				"Choisissez la difficulté :", 
-				"Difficulté", 
+				"Choisissez la difficult\u00e9 :", 
+				"Difficult\u00e9", 
 				JOptionPane.DEFAULT_OPTION, 
 				JOptionPane.QUESTION_MESSAGE,
 				null, 
@@ -98,8 +100,14 @@ public class MenuController implements ActionListener {
 		
 		// Génération d'une grille aléatoire en fonction du niveau de difficulté
 		if (difficulty != null) {
-			Grille newGrille = Grille.arrayToGrille(GrilleStore.choixGrille(difficulty));
-			this.grille.setCases(newGrille.getCases());
+			int[][] grilleArray = GrilleStore.choixGrille(difficulty);
+			
+			if (grilleArray != null) {
+				Grille newGrille = Grille.arrayToGrille(grilleArray);
+				this.grille.setCases(newGrille.getCases());
+			} else {
+				JOptionPane.showMessageDialog(menu, Charset.forName("UTF-8").encode("Vous n'\u00eates pas connect\u00e9 à Internet"), "Warning", JOptionPane.WARNING_MESSAGE);
+			}
 		}
 		
 	}
@@ -129,7 +137,7 @@ public class MenuController implements ActionListener {
 				}
 				this.grille.setCases(newGrille.getCases());
 			} catch (ClassNotFoundException | IOException e) {
-				JOptionPane.showMessageDialog(menu, "Wrong file format.", "Warning", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(menu, "Mauvais format de fichier", "Warning", JOptionPane.WARNING_MESSAGE);
 				
 			}
 		}
@@ -214,11 +222,11 @@ public class MenuController implements ActionListener {
 	 * Afficher les règles
 	 */
 	private void afficherRegles() {	
-		String regle = "Les regles du sudoku sont tres simples.\r\n"+ 
+		String regle = "Les r\u00e8gles du sudoku sont tr\u00e8s simples.\r\n"+ 
 			"Un sudoku classique contient neuf lignes et neuf colonnes, soit 81 cases au total.\r\n"+
-			"Le but du jeu est de remplir ces cases avec des chiffres allant de 1 a� 9 en veillant\r\n"+
-			"toujours a� ce qu'un meme chiffre ne figure qu'une seule fois par colonne, une seule\r\n"+
-			"fois par ligne et une seule fois par carre de neuf cases.\r\n";
+			"Le but du jeu est de remplir ces cases avec des chiffres allant de 1 \u00e0 9 en veillant\r\n"+
+			"toujours \u00e0 ce qu'un m\u00eame chiffre ne figure qu'une seule fois par colonne, une seule\r\n"+
+			"fois par ligne et une seule fois par carr\u00e9 de neuf cases.\r\n";
 		
 		JOptionPane.showMessageDialog(menu, regle);
 	}
@@ -228,7 +236,7 @@ public class MenuController implements ActionListener {
 	 */
 	private void demandeResoudre(){
 		JOptionPane.showMessageDialog(menu, 
-				"Veuillez rentrer une grille a resoudre et selectionner \"Lancer execution\" dans le menu resoudre.");
+				"Veuillez rentrer une grille \u00e0 r\u00e9soudre et s\u00e9lectionner \"Lancer ex\u00e9cution\" dans le menu r\u00e9soudre.");
 		this.menu.getMenuResoudre().setEnabled(true);
 		this.grille.setCases(new Grille().getCases()); //Remise � zero de la grille
 	}

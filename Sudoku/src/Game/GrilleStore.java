@@ -52,7 +52,6 @@ public class GrilleStore {
 			br.close();
 			return stringToGrille(response);
 		} catch (Exception e) {
-			e.printStackTrace();
 		} finally {
 			if (connection != null) {
 				connection.disconnect();
