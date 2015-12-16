@@ -61,6 +61,7 @@ public class InterfaceJeu extends JPanel implements Observer {
 						"Champions !",
 						JOptionPane.INFORMATION_MESSAGE
 						);
+				this.grilleOver = false;
 			}
 		}
 	}
