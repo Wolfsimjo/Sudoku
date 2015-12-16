@@ -26,6 +26,5 @@ public class Sudoku {
 		
 		model.addObserver(ij);
 		ig.addControllers(gk, gm, mc);
-	}
-	
+	}	
 }
